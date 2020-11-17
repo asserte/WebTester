@@ -1,0 +1,16 @@
+
+#Passwords can be encrypted by using Configurations.java class main method.
+script.user.password=ENC(PbHZ6sxcxlNs44sO0XDc9fTGNpNuj1Lm)
+script.default.portal.url=https://member-sit.bcbsm.com/mpa
+
+driver.default.implicit.wait=2
+driver.default.page.load.wait=20
+driver.take.screenshot=true
+driver.browser=chrome
+driver.proxy.host=zproxy.bcbsm.com
+driver.proxy.port=10256
+
+
+runner.report.folder=target/allure-results
+runner.thread.count=2
+runner.reuse.session=true
