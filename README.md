@@ -3,6 +3,8 @@ is a test automation framework that lets you develop, maintain and execute Selen
 
 It has a set of handy methods that make test scripts more readable and compact.
 
+## :package: Packages
+
 ### Runner
 `@webdriver/runner`
 A WebTester runner to execute test scripts
@@ -21,3 +23,4 @@ This package contains class for webdriver initiation as well as classes that add
 Utils package that contains Highlighters and DriverCreator classes. 
 Highlighters is a class for element colouring. 
 DriverCreator is a class that creates driver; you can choose from Chrome, Edge, Internet Explorer and Firefox as well as setup proxy.
+:man_technologist:
