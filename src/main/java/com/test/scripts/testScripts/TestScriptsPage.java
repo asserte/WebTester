@@ -6,7 +6,8 @@ import com.test.commons.Utils;
 
 public class TestScriptsPage extends Utils {
 
-	public By agreeButton = By.xpath("//span[text()='Sutinku']");
-	public By searchButton = By.xpath("//input[@title='Ieškoti']");
-	public By wuLink = By.xpath("//span[contains(text(),'Western Union Lietuva')]");
+	public static By searchFieldBy = By.id("searchInput");
+	public static By searchButtonBy = By.id("searchButton");
+	public static By essayLinkBy = By.xpath("//span[text()='Essay']");
+	public static By essayTextBy = By.xpath("//p[contains(text(), 'Items such as short answer or essay typically require a test taker to write a response to fulfill the requirements of the item.')]");
 }

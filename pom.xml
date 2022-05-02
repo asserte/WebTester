@@ -9,36 +9,39 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.5.RELEASE</version>
+		<version>2.6.7</version>
 	</parent>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.complianceLevel>1.8</maven.compiler.complianceLevel>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 
-		<autotests-webdriver-runner.version>0.0.2-SNAPSHOT</autotests-webdriver-runner.version>
-		<guava.version>30.0-jre</guava.version>
-		<allure.version>1.5.4</allure.version>
-		<aspectj.version>1.9.6</aspectj.version>
+		<guava.version>31.1-jre</guava.version>
+		<aspectj.version>1.9.9.1</aspectj.version>
+		<reflections.version>0.10.2</reflections.version>
 
-		<commons-cli.version>1.4</commons-cli.version>
-		<log4j.version>2.14.0</log4j.version>
-
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-		<cxf.version>3.4.1</cxf.version>
-		<commons-lang3.version>3.11</commons-lang3.version>
-		<commons-io.version>2.8.0</commons-io.version>
+		<commons-cli.version>1.5.0</commons-cli.version>
+		<commons-lang3.version>3.12.0</commons-lang3.version>
+		<commons-io.version>2.11.0</commons-io.version>
 		<commons-logging.version>1.2</commons-logging.version>
-		<reflections.version>0.9.12</reflections.version>
-		<selenium.version>4.0.0-alpha-7</selenium.version>
-	</properties>
+		<commons-collections4.version>4.4</commons-collections4.version>
 
+		<selenium.version>4.1.4</selenium.version>
+		<webdrivermanager.vesrion>5.1.1</webdrivermanager.vesrion>
+		<allure.version>1.5.4</allure.version>
+
+		<xlsx-streamer.version>2.2.0</xlsx-streamer.version>
+		<stax-api.version>1.0-2</stax-api.version>
+		<curvesapi.version>1.07</curvesapi.version>
+		<jaxb-api.version>2.3.1</jaxb-api.version>
+		<jaxb-runtime.version>2.3.6</jaxb-runtime.version>
+		<jasypt.version>1.9.3</jasypt.version>
+		<javax.activation.version>1.1.1</javax.activation.version>
+
+		<aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
+		<maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -68,25 +71,25 @@
 		<dependency>
 			<groupId>com.monitorjbl</groupId>
 			<artifactId>xlsx-streamer</artifactId>
-			<version>2.1.0</version>
+			<version>${xlsx-streamer.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.xml.stream</groupId>
 			<artifactId>stax-api</artifactId>
-			<version>1.0-2</version>
+			<version>${stax-api.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.github.virtuald</groupId>
 			<artifactId>curvesapi</artifactId>
-			<version>1.06</version>
+			<version>${curvesapi.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<version>4.4</version>
+			<version>${commons-collections4.version}</version>
 		</dependency>
 
 		<dependency>
@@ -118,7 +121,6 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -155,31 +157,31 @@
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>4.2.2</version>
+			<version>${webdrivermanager.vesrion}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jasypt</groupId>
 			<artifactId>jasypt</artifactId>
-			<version>1.9.3</version>
+			<version>${jasypt.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
-			<version>2.3.1</version>
+			<version>${jaxb-api.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.activation</groupId>
 			<artifactId>activation</artifactId>
-			<version>1.1.1</version>
+			<version>${javax.activation.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>2.3.3</version>
+			<version>${jaxb-runtime.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -204,7 +206,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
-				<version>1.11</version>
+				<version>${aspectj-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -216,13 +218,13 @@
 					<showWeaveInfo />
 					<forceAjcCompile>true</forceAjcCompile>
 					<Xlint>ignore</Xlint>
-					<complianceLevel>1.8</complianceLevel>
+					<complianceLevel>${maven.compiler.complianceLevel}</complianceLevel>
 					<sources />
 					<weaveDirectories>
 						<weaveDirectory>${project.build.directory}/classes</weaveDirectory>
 					</weaveDirectories>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>ru.yandex.qatools.allure</groupId>
@@ -235,7 +237,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>${maven-jar-plugin.version}</version>
 				<configuration>
 					<finalName>${project.artifactId}</finalName>
 				</configuration>
