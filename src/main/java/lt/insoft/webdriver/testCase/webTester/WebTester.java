@@ -28,7 +28,6 @@ import lt.insoft.webdriver.testCase.utils.Highlighters;
 public class WebTester extends WebTesterBase {
 
 	private void waitToBeVisible(By by, long timeOutInSeconds) throws Exception {
-		//TODO check how it works in mulithread
 		try {
 			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));

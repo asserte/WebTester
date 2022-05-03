@@ -1,7 +1,8 @@
 package com.test.scripts.testScripts;
 
 import org.junit.Test;
-import org.openqa.selenium.Keys;
+
+import com.test.commons.Constants;
 
 import lt.insoft.webdriver.testCase.TestCase;
 import ru.yandex.qatools.allure.annotations.Description;
@@ -10,13 +11,13 @@ import ru.yandex.qatools.allure.annotations.Title;
 @Title("Testing")
 public class TestScripts extends TestCase {
 
-	TestScriptsUtils accumsAndCopayUtils = null;
+	TestScriptsUtils scriptUtils = null;
 	TestScriptsPage testScriptsPage = null;
 
 	// @Before
 	public void before() throws Exception {
 		super.before();
-		accumsAndCopayUtils = new TestScriptsUtils(t);
+		scriptUtils = new TestScriptsUtils(t);
 		testScriptsPage = new TestScriptsPage();
 	}
 
@@ -24,7 +25,8 @@ public class TestScripts extends TestCase {
 	@Test
 	@Description("Detailed description")
 	public void t01() throws Exception {
-		t.get("https://en.wikipedia.org/");
+		t.get(Constants.DEFAULT_PORTAL_URL);
+		System.out.println("password" + Constants.USER_PASSWORD);
 		t.setText(TestScriptsPage.searchFieldBy, 5, "testing");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link ", TestScriptsPage.essayLinkBy, 2);
