@@ -14,7 +14,7 @@ public final class ConstantConfigurations {
 
 	private Properties properties = null;
 	private static ConstantConfigurations instance = null;
-	private static String propertyFile = System.getProperty("property.file", "apps.properties");
+	private static String propertyFile = System.getProperty("property.file", "app.properties");
 	private static String masterPassword = System.getProperty("master"); 
 	private static final Log LOG = LogFactory.getLog(ConstantConfigurations.class);
 	
