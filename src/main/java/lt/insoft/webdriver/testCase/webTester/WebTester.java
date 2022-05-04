@@ -3,6 +3,7 @@ package lt.insoft.webdriver.testCase.webTester;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -52,12 +53,40 @@ public class WebTester extends WebTesterBase {
 			}
 		}
 	}
+	
+	private List<WebElement> findNonStaleElements(By by) throws Exception {
+		List<WebElement> foundElements = null;
+		int count = 0;
+		int maxTries = 5;
+		while (true) {
+			try {
+				foundElements = driver.findElements(by);
+				return foundElements;
+			} catch (StaleElementReferenceException ex) {
+				sleepMillis(500);
+				if (++count == maxTries)
+					throw new StaleElementReferenceException("Too many stale element retries");
+			}
+		}
+	}
 
 	public WebElement find(By by, int timeToWait) throws Exception {
 		waitToBeVisible(by, timeToWait);
 		try {
 			WebElement wb = Highlighters.highlightGreen(driver, findNonStaleElement(by));
 			scrollToWebElement(wb);
+			LOG.info("Find " + by.toString());
+			return wb;
+		} catch (NoSuchElementException e) {
+			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
+		}
+	}
+	
+	public List<WebElement> findElements(By by, int timeToWait) throws Exception {
+		waitToBeVisible(by, timeToWait);
+		try {
+			List<WebElement> wb = Highlighters.highlightGreen(driver, findNonStaleElements(by));
+			scrollToWebElement(wb.get(0));
 			LOG.info("Find " + by.toString());
 			return wb;
 		} catch (NoSuchElementException e) {
