@@ -3,6 +3,7 @@ package lt.insoft.webdriver.testCase.webTester;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -28,12 +29,11 @@ import lt.insoft.webdriver.testCase.utils.Highlighters;
 public class WebTester extends WebTesterBase {
 
 	private void waitToBeVisible(By by, long timeOutInSeconds) throws Exception {
-		//TODO check how it works in mulithread
 		try {
 			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 		} catch (TimeoutException e) {
-			System.out.println("Element " + by.toString() + " failed to become visible");
+			LOG.info("Element " + by.toString() + " failed to become visible");
 			throw e;
 		}
 	}
@@ -53,13 +53,41 @@ public class WebTester extends WebTesterBase {
 			}
 		}
 	}
+	
+	private List<WebElement> findNonStaleElements(By by) throws Exception {
+		List<WebElement> foundElements = null;
+		int count = 0;
+		int maxTries = 5;
+		while (true) {
+			try {
+				foundElements = driver.findElements(by);
+				return foundElements;
+			} catch (StaleElementReferenceException ex) {
+				sleepMillis(500);
+				if (++count == maxTries)
+					throw new StaleElementReferenceException("Too many stale element retries");
+			}
+		}
+	}
 
 	public WebElement find(By by, int timeToWait) throws Exception {
 		waitToBeVisible(by, timeToWait);
 		try {
 			WebElement wb = Highlighters.highlightGreen(driver, findNonStaleElement(by));
 			scrollToWebElement(wb);
-			System.out.println("Find " + by.toString());
+			LOG.info("Find " + by.toString());
+			return wb;
+		} catch (NoSuchElementException e) {
+			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
+		}
+	}
+	
+	public List<WebElement> findElements(By by, int timeToWait) throws Exception {
+		waitToBeVisible(by, timeToWait);
+		try {
+			List<WebElement> wb = Highlighters.highlightGreen(driver, findNonStaleElements(by));
+			scrollToWebElement(wb.get(0));
+			LOG.info("Find " + by.toString());
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
@@ -98,7 +126,7 @@ public class WebTester extends WebTesterBase {
 	}
 
 	public byte[] click(By by, int timeToWait) throws Exception {
-		System.out.println("Click " + by);
+		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightRed(driver, find(by, timeToWait));
 		scrollToWebElement(wb);
 		byte[] screen = screenshot();
@@ -113,7 +141,7 @@ public class WebTester extends WebTesterBase {
 	}
 
 	public void setText(By by, int timeToWait, CharSequence... value) throws Exception {
-		System.out.println("Click " + by);
+		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightBlue(driver, find(by, timeToWait));
 		Assert.assertTrue(by + " input should be enabled.", wb.isEnabled());
 		Assert.assertTrue(by + " input should be displayed.", wb.isDisplayed());
