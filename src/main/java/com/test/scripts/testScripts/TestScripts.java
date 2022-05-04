@@ -22,13 +22,23 @@ public class TestScripts extends TestCase {
 
 
 	@Test
-	@Description("Detailed description")
+	@Description("Checking text in testing article")
 	public void t01() throws Exception {
 		t.get("https://en.wikipedia.org/");
-		t.setText(TestScriptsPage.searchFieldBy, 5, "testing");
+		t.setText("Enter text to search bar",TestScriptsPage.searchFieldBy, 5, "testing");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
-		t.click("Click Essay link ", TestScriptsPage.essayLinkBy, 2);
-		t.find(TestScriptsPage.essayTextBy, 2);
+		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
+		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
+	}
+	
+	@Test
+	@Description("Checking text in math article")
+	public void t02() throws Exception {
+		t.get("https://en.wikipedia.org/");
+		t.setText("Enter text to search bar",TestScriptsPage.searchFieldBy, 5, "maths");
+		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
+//		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
+//		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
 	}
 
 }

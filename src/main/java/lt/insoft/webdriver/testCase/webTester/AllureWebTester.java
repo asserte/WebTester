@@ -67,5 +67,22 @@ public class AllureWebTester extends WebTester{
 		failIfFound(by, timeToWait);
 	}
 
+	
+	/**
+	 * Main click method for clicking elements by using By strategy. Every instance
+	 * of method will take screen shot before the click. String parameter is only
+	 * used for step text in the report. Throws exception and stops test case.
+	 */
+	@Step("{0}")
+	@Attachment
+	public void setText(String stepText, By by, int timeToWait, CharSequence... value) throws Exception {
+		try {
+			setText(by, timeToWait, value);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			// t.screenshot();
+		}
+	}
 
 }
