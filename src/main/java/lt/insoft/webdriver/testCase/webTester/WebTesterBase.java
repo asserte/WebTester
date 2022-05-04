@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +23,7 @@ import ru.yandex.qatools.allure.annotations.Attachment;
 public abstract class WebTesterBase {
 	protected WebDriver driver = null;
 	private DriverCreator driverCreator = new DriverCreator();
-
+	protected static final Log LOG = LogFactory.getLog(WebTesterBase.class);
 
 	/**
 	 * Variable, how long webdriver should search for element.
@@ -77,7 +79,7 @@ public abstract class WebTesterBase {
 	private void sleep(long amount, TimeUnit tu) throws Exception {
 		long millis = tu.toMillis(amount);
 		if (millis > 999) {
-			System.out.println("sleep " + amount + " " + tu.toString());
+			LOG.info("sleep " + amount + " " + tu.toString());
 		}
 		try {
 			Thread.sleep(millis);
@@ -92,7 +94,7 @@ public abstract class WebTesterBase {
 //			WindowsUtils.killByName("chrome.exe");
 			driver.quit();
 		} catch (NullPointerException e) {
-			System.out.println("Could not destroy driver.");
+			LOG.warn("Could not destroy driver.");
 		}
 	}
 	

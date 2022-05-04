@@ -94,7 +94,7 @@ public class TestCallable implements Callable<Void> {
 			try {
 				testItem.getTestMethod().invoke(testCase, new Object[] {});
 			}catch (TimeoutException e) {
-				System.out.println("------------------------------------- TimeoutException");
+				LOG.error("------------------------------------- TimeoutException");
 				LOG.error(e.getMessage(), e);
 				TestItem.setNoSuccess();
 				try {

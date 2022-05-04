@@ -64,8 +64,6 @@ public class RunnerUtils {
 	public static List<String> getPackagesUnderPackage(String packageToLoadClassesFrom, String packageStartToFilterBy) { 
         Reflections reflections = new Reflections();
         FilterBuilder TestModelFilter = new FilterBuilder().include(packageToLoadClassesFrom);
-//	        FilterBuilder TestModelFilter = new FilterBuilder().include("com.test.*");
-
         reflections = new Reflections(new ConfigurationBuilder()
                 .setUrls(Arrays.asList(ClasspathHelper.forClass(RunnerUtils.class))).filterInputsBy(TestModelFilter)
                 .setScanners(new SubTypesScanner(false), new TypeAnnotationsScanner(), new FieldAnnotationsScanner(),
@@ -73,13 +71,9 @@ public class RunnerUtils {
                         new MemberUsageScanner()));
 
         Set<Class<? extends Object>> allClasses = reflections.getSubTypesOf(Object.class);
-//	        System.out.println(allClasses);
         for (Iterator it = allClasses.iterator(); it.hasNext();) {
             Class<? extends Object> clazz = (Class<? extends Object>) it.next();
-//	            System.out.println(clazz.getCanonicalName());
         }
-	
-//		return findPackageNamesStartingWith(packageStartToFilterBy);
         List<String> list =  findPackageNamesStartingWith("com.test.scripts");
         Collections.sort(list);
 		return list;

@@ -32,7 +32,7 @@ public class WebTester extends WebTesterBase {
 			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 		} catch (TimeoutException e) {
-			System.out.println("Element " + by.toString() + " failed to become visible");
+			LOG.info("Element " + by.toString() + " failed to become visible");
 			throw e;
 		}
 	}
@@ -58,7 +58,7 @@ public class WebTester extends WebTesterBase {
 		try {
 			WebElement wb = Highlighters.highlightGreen(driver, findNonStaleElement(by));
 			scrollToWebElement(wb);
-			System.out.println("Find " + by.toString());
+			LOG.info("Find " + by.toString());
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
@@ -97,7 +97,7 @@ public class WebTester extends WebTesterBase {
 	}
 
 	public byte[] click(By by, int timeToWait) throws Exception {
-		System.out.println("Click " + by);
+		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightRed(driver, find(by, timeToWait));
 		scrollToWebElement(wb);
 		byte[] screen = screenshot();
@@ -112,7 +112,7 @@ public class WebTester extends WebTesterBase {
 	}
 
 	public void setText(By by, int timeToWait, CharSequence... value) throws Exception {
-		System.out.println("Click " + by);
+		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightBlue(driver, find(by, timeToWait));
 		Assert.assertTrue(by + " input should be enabled.", wb.isEnabled());
 		Assert.assertTrue(by + " input should be displayed.", wb.isDisplayed());
