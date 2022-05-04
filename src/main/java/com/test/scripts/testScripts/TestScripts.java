@@ -1,10 +1,10 @@
 package com.test.scripts.testScripts;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.test.commons.Constants;
 
-import junit.framework.Assert;
 import lt.insoft.webdriver.testCase.TestCase;
 import ru.yandex.qatools.allure.annotations.Description;
 import ru.yandex.qatools.allure.annotations.Title;
