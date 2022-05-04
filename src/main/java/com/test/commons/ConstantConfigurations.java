@@ -7,13 +7,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.exceptions.EncryptionInitializationException;
+import org.jasypt.exceptions.EncryptionOperationNotPossibleException;
 import org.jasypt.properties.EncryptableProperties;
 
 public final class ConstantConfigurations {
 
 	private Properties properties = null;
 	private static ConstantConfigurations instance = null;
-	private static String propertyFile = System.getProperty("property.file", "app.properties");
+	private static String propertyFile = System.getProperty("property.file", "apps.properties");
 	private static String masterPassword = System.getProperty("master"); 
 	private static final Log LOG = LogFactory.getLog(ConstantConfigurations.class);
 	
@@ -83,7 +84,7 @@ public final class ConstantConfigurations {
 		if (key != null && !key.trim().isEmpty()) {
 			try {
 				result = getInstance().properties.getProperty(key);
-			} catch (EncryptionInitializationException|ExceptionInInitializerError|IllegalArgumentException e) {
+			} catch (EncryptionInitializationException|ExceptionInInitializerError|IllegalArgumentException|EncryptionOperationNotPossibleException e) { //TODO
 				LOG.error("Master password needs to be provided as a JDK parameter for scripts to run. The master password value is used to decrypt any encrypted parameters in the property file.");
 				LOG.error("If Master Password value is not provided, encrypted parameters won't be read from property file, an empty value will be provided instead");	
 				e.printStackTrace();
