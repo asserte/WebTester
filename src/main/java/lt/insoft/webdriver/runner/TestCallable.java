@@ -11,13 +11,13 @@ import org.junit.runner.notification.Failure;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.TimeoutException;
 
+import io.qameta.allure.Story;
 import lt.insoft.webdriver.runner.model.RunnerConfiguration;
 import lt.insoft.webdriver.runner.model.TestItem;
 import lt.insoft.webdriver.runner.model.ThreadId;
 import lt.insoft.webdriver.runner.util.ConcurrentAllureRunListener;
 import lt.insoft.webdriver.runner.util.RunnerUtils;
 import lt.insoft.webdriver.testCase.WebDriverTestCase;
-import ru.yandex.qatools.allure.annotations.Title;
 
 public class TestCallable implements Callable<Void> {
 	private static final Log LOG = LogFactory.getLog(TestCallable.class);
@@ -128,8 +128,8 @@ public class TestCallable implements Callable<Void> {
 	}
 
 	private String getTitle() {
-		if (testItem.getTestMethod().getAnnotation(Title.class) != null) {
-			return testItem.getTestMethod().getAnnotation(Title.class).value();
+		if (testItem.getTestMethod().getAnnotation(Story.class) != null) {
+			return testItem.getTestMethod().getAnnotation(Story.class).value();
 		} else
 			return "";
 	}

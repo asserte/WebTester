@@ -17,13 +17,14 @@ import org.springframework.stereotype.Component;
 import com.test.commons.Constants;
 
 import ru.yandex.qatools.commons.model.Environment;
+import ru.yandex.qatools.commons.model.ObjectFactory;
 import ru.yandex.qatools.commons.model.Parameter;
 
 @Component
 public class XmlBuilder {
 
 	public void buildEnvironmentDescription() throws JAXBException, IOException {
-		ru.yandex.qatools.commons.model.ObjectFactory factory = new ru.yandex.qatools.commons.model.ObjectFactory();
+		ObjectFactory factory = new ObjectFactory();
 		Environment environment = new Environment();
 		List<Parameter> parameters = new ArrayList<Parameter>();
 

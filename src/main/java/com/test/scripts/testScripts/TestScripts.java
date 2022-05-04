@@ -5,11 +5,11 @@ import org.junit.Test;
 
 import com.test.commons.Constants;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
 import lt.insoft.webdriver.testCase.TestCase;
-import ru.yandex.qatools.allure.annotations.Description;
-import ru.yandex.qatools.allure.annotations.Title;
 
-@Title("Testing")
+@Story("Testing")
 public class TestScripts extends TestCase {
 
 	TestScriptsUtils scriptUtils = null;

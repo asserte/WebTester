@@ -7,8 +7,8 @@ import org.openqa.selenium.WebElement;
 
 import com.test.commons.Action;
 
-import ru.yandex.qatools.allure.annotations.Attachment;
-import ru.yandex.qatools.allure.annotations.Step;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 
 /**
  * @author c644721 Dovilas This class adds Custom Allure step methods to the

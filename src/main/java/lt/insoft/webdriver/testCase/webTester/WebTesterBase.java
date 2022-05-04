@@ -14,8 +14,8 @@ import org.openqa.selenium.WebDriver;
 
 import com.test.commons.Constants;
 
+import io.qameta.allure.Attachment;
 import lt.insoft.webdriver.testCase.utils.DriverCreator;
-import ru.yandex.qatools.allure.annotations.Attachment;
 
 /**
  * Class for webdriver initiation. </br>
