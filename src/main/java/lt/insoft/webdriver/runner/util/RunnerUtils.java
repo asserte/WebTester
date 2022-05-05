@@ -30,7 +30,7 @@ public class RunnerUtils {
 	public static List<String> getTestMethods(String packageName) {
 //		Reflections reflections = new Reflections(new ConfigurationBuilder()
 //				.setUrls(ClasspathHelper.forPackage(packageName)).setScanners(new MethodAnnotationsScanner()));
-		Reflections reflections = new Reflections(packageName);
+		Reflections reflections = new Reflections(packageName, new MethodAnnotationsScanner());
 		Collection<Method> methods = reflections.getMethodsAnnotatedWith(Test.class);
 
 		List<String> result = new ArrayList<String>();
@@ -40,6 +40,13 @@ public class RunnerUtils {
 		Collections.sort(result);
 
 		return result;
+	}
+
+	public static Set<Method> getMethodsAnnotatedWith(Class<?> type, Class<? extends Annotation> annotation)
+			throws ClassNotFoundException {
+		Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forClass(type))
+				.setScanners(new MethodAnnotationsScanner()));
+		return reflections.getMethodsAnnotatedWith(annotation);
 	}
 
 	public static void invokeMultiple(Collection<Method> methods) throws Exception {
