@@ -76,7 +76,7 @@ public class AutotestsRunner implements CommandLineRunner, ApplicationContextAwa
 			Map<Class<?>, List<TestItem>> testItems = buildTestItems();
 
 			runTests(testItems);
-			xmlBuilder.buildEnvironmentDescription();
+//			xmlBuilder.buildEnvironmentDescription();
 
 			LOG.info("Done.");
 			System.exit(SpringApplication.exit(applicationContext, new TestsStatusGenerator()));

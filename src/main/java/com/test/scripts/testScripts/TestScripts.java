@@ -32,7 +32,7 @@ public class TestScripts extends TestCase {
 		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
 	}
 
-	@Test
+//	@Test
 	@Description("Count how many references are in Math article")
 	public void t02() throws Exception {
 		int expectedCount = 70;
