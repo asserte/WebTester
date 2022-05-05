@@ -19,18 +19,18 @@ public class TestLister {
 
 	public static void listTests(String scanPackage, String filePath) {
 		LOG.info(String.format("Listing all @Test annotated methods from package %s to file %s", scanPackage, filePath));
-		listItems(RunnerUtils.getTestMethods(scanPackage), filePath);
+		listItems(RunnerUtils.getTestMethods(scanPackage), filePath, "tests=");
 	}
 	
 	public static void listPackages(String scanPackage, String filePath) {
 		LOG.info(String.format("Listing all packages from package %s to file %s", scanPackage, filePath));
-		listItems(RunnerUtils.getPackagesUnderPackage(scanPackage + ".*", scanPackage + ".scripts"), filePath);
+		listItems(RunnerUtils.getPackagesUnderPackage(scanPackage + ".*", scanPackage + ".scripts"), filePath, "packages=");
 	}
 	
-	private static void listItems(List<String> list, String filePath) {
+	private static void listItems(List<String> list, String filePath, String type) {
 		Assert.hasText(filePath, "File path must not be empty");
 		try (OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filePath), StandardCharsets.UTF_8)) {
-			out.write("packages=");
+			out.write(type);
 			out.write(buildString(list));
 		} catch (Exception e) {
 			System.err.println("Unable to list items to file " + filePath);
