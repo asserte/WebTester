@@ -56,26 +56,11 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 
-		<!--  <dependency>
+		<dependency>
 			<groupId>ru.yandex.qatools.allure</groupId>
 			<artifactId>allure-junit-adaptor</artifactId>
 			<version>${allure.version}</version>
-		</dependency> -->
-		
-		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-java-commons -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-java-commons</artifactId>
-    <version>2.17.3</version>
-</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-junit4</artifactId>
-    <version>2.17.3</version>
-</dependency>
-		
+		</dependency>
 
 		<dependency>
 			<groupId>commons-cli</groupId>
@@ -207,7 +192,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>lt.insoft.webdriver.runner.AutotestsRunner</mainClass>
+					<mainClass>com.test.commons.Runner</mainClass>
 				</configuration>
 				<executions>
 					<execution>
@@ -242,8 +227,8 @@
 					<target>${maven.compiler.target}</target>
 					<aspectLibraries>
 						<aspectLibrary>
-							<groupId>io.qameta.allure</groupId>
-							<artifactId>allure-java-commons</artifactId>
+							<groupId>ru.yandex.qatools.allure</groupId>
+							<artifactId>allure-java-aspects</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>
