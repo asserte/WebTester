@@ -207,7 +207,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.bcbsm.commons.Runner</mainClass>
+					<mainClass>lt.insoft.webdriver.AutotestsRunner</mainClass>
 				</configuration>
 				<executions>
 					<execution>
