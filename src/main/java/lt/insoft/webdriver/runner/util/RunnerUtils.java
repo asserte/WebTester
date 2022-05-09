@@ -30,7 +30,8 @@ public class RunnerUtils {
 	public static List<String> getTestMethods(String packageName) {
 //		Reflections reflections = new Reflections(new ConfigurationBuilder()
 //				.setUrls(ClasspathHelper.forPackage(packageName)).setScanners(new MethodAnnotationsScanner()));
-		Reflections reflections = new Reflections(packageName, new MethodAnnotationsScanner());
+		Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage(packageName)).setScanners(new MethodAnnotationsScanner()));	
+//		Reflections reflections = new Reflections(packageName, new MethodAnnotationsScanner());
 		Collection<Method> methods = reflections.getMethodsAnnotatedWith(Test.class);
 
 		List<String> result = new ArrayList<String>();
