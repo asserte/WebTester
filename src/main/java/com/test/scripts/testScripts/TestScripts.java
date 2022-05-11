@@ -27,6 +27,8 @@ public class TestScripts extends TestCase {
 	public void t01() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
 		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
+		t.allureStepTestMethod();
+		t.allureStepTestMethod("Test test te");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
 		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);

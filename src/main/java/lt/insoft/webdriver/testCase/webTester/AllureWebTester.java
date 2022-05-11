@@ -99,6 +99,17 @@ public class AllureWebTester extends WebTester {
 			// t.screenshot();
 		}
 	}
+	
+//TODO remove after testing	
+	@Step("Testing the allure step message")
+	public void allureStepTestMethod() throws Exception {
+		System.out.println("test");
+	}
+	
+	@Step("{0}")
+	public void allureStepTestMethod(String test) throws Exception {
+		System.out.println("test");
+	}
 
 	/**
 	 * Method used to envelope methods in order to add an Allure step over them.
