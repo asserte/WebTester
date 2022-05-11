@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.test.commons.Constants;
 
+import io.qameta.allure.Step;
 import lt.insoft.webdriver.testCase.utils.Highlighters;
 
 /**
@@ -125,6 +126,7 @@ public class WebTester extends WebTesterBase {
 		new WebDriverWait(driver, Duration.ofSeconds(timeToWait)).until(ExpectedConditions.invisibilityOfElementLocated(by));
 	}
 
+	@Step
 	public byte[] click(By by, int timeToWait) throws Exception {
 		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightRed(driver, find(by, timeToWait));
@@ -140,6 +142,7 @@ public class WebTester extends WebTesterBase {
 				currentUrl.contains(expectedUrl));
 	}
 
+	@Step
 	public void setText(By by, int timeToWait, CharSequence... value) throws Exception {
 		LOG.info("Click " + by);
 		WebElement wb = Highlighters.highlightBlue(driver, find(by, timeToWait));
