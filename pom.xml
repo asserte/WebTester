@@ -245,18 +245,22 @@
 					</weaveDirectories>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
-					<!-- <aspectLibraries>
+					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>io.qameta.allure</groupId>
 							<artifactId>allure-java-commons</artifactId>
 						</aspectLibrary>
-					</aspectLibraries> -->
-					<weaveDependencies>
+						<aspectLibrary>
+							<groupId>io.qameta.allure</groupId>
+							<artifactId>allure-maven</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+					<!-- <weaveDependencies>
 						<weaveDependency>
 							<groupId>io.qameta.allure</groupId>
 							<artifactId>allure-java-commons</artifactId>
 						</weaveDependency>
-					</weaveDependencies>
+					</weaveDependencies> -->
 				</configuration>
 			</plugin>
 
