@@ -251,7 +251,7 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>io.qameta.allure</groupId>
-							<artifactId>allure-maven</artifactId>
+							<artifactId>allure-java-commons</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 				</configuration>
