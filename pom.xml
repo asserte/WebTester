@@ -56,34 +56,31 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 
-		<!--  <dependency>
-			<groupId>ru.yandex.qatools.allure</groupId>
-			<artifactId>allure-junit-adaptor</artifactId>
-			<version>${allure.version}</version>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>ru.yandex.qatools.allure</groupId> <artifactId>allure-junit-adaptor</artifactId> 
+			<version>${allure.version}</version> </dependency> -->
+
 		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-java-commons -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-java-commons</artifactId>
-    <version>2.14.0</version>
-</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-java-commons</artifactId>
+			<version>2.14.0</version>
+		</dependency>
 
-<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-maven</artifactId>
-    <version>2.10.0</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-maven</artifactId>
+			<version>2.10.0</version>
+		</dependency>
 
-		
+
 		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-junit4</artifactId>
-    <version>2.14.0</version>
-</dependency>
-		
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit4</artifactId>
+			<version>2.14.0</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>commons-cli</groupId>
@@ -248,12 +245,18 @@
 					</weaveDirectories>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
-					<aspectLibraries>
+					<!-- <aspectLibraries>
 						<aspectLibrary>
 							<groupId>io.qameta.allure</groupId>
 							<artifactId>allure-java-commons</artifactId>
 						</aspectLibrary>
-					</aspectLibraries>
+					</aspectLibraries> -->
+					<weaveDependencies>
+						<weaveDependency>
+							<groupId>io.qameta.allure</groupId>
+							<artifactId>allure-java-commons</artifactId>
+						</weaveDependency>
+					</weaveDependencies>
 				</configuration>
 			</plugin>
 
