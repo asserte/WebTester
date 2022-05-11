@@ -248,11 +248,11 @@
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>io.qameta.allure</groupId>
-							<artifactId>allure-java-commons</artifactId>
+							<artifactId>allure-maven</artifactId>
 						</aspectLibrary>
 						<aspectLibrary>
 							<groupId>io.qameta.allure</groupId>
-							<artifactId>allure-maven</artifactId>
+							<artifactId>allure-java-commons</artifactId>
 						</aspectLibrary>
 					</aspectLibraries>
 					<!-- <weaveDependencies>
