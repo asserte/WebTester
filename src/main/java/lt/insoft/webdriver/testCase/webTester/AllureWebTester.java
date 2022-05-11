@@ -89,7 +89,7 @@ public class AllureWebTester extends WebTester {
 	 * @throws Exception
 	 */
 	@Step("{0}")
-	@Attachment
+//	@Attachment
 	public void setText(String stepText, By by, int timeToWait, CharSequence... value) throws Exception {
 		try {
 			setText(by, timeToWait, value);
@@ -100,17 +100,6 @@ public class AllureWebTester extends WebTester {
 		}
 	}
 	
-//TODO remove after testing	
-	@Step("Testing the allure step message")
-	public void allureStepTestMethod() throws Exception {
-		System.out.println("test");
-	}
-	
-	@Step("{0}")
-	public void allureStepTestMethod(String test) throws Exception {
-		System.out.println("test");
-	}
-
 	/**
 	 * Method used to envelope methods in order to add an Allure step over them.
 	 * 
