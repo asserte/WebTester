@@ -24,7 +24,6 @@ public class TestScripts extends TestCase {
 
 	@Test
 	@Description("Checking text in testing article")
-	@Story("Testing annotations")
 	public void t01() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
 		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
