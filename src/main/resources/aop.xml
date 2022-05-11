@@ -1,0 +1,5 @@
+<aspectj>
+    <weaver options="-verbose -showWeaveInfo">
+        <include within="io.qameta.allure.*"/>
+    </weaver>
+</aspectj>
