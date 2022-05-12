@@ -201,64 +201,62 @@
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<configuration>
-						<mainClass>com.test.commons.Runner</mainClass>
-					</configuration>
-					<executions>
-						<execution>
-							<goals>
-								<goal>repackage</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.test.commons.Runner</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>aspectj-maven-plugin</artifactId>
-					<version>${aspectj-maven-plugin.version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>compile</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<showWeaveInfo />
-						<forceAjcCompile>true</forceAjcCompile>
-						<Xlint>ignore</Xlint>
-						<complianceLevel>${maven.compiler.complianceLevel}</complianceLevel>
-						<sources />
-						<weaveDirectories>
-							<weaveDirectory>${project.build.directory}/classes</weaveDirectory>
-						</weaveDirectories>
-						<source>${maven.compiler.source}</source>
-						<target>${maven.compiler.target}</target>
-						<weaveDependencies>
-							<weaveDependency>
-								<groupId>io.qameta.allure</groupId>
-								<artifactId>allure-java-commons</artifactId>
-							</weaveDependency>
-						</weaveDependencies>
-					</configuration>
-				</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>${aspectj-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<showWeaveInfo />
+					<forceAjcCompile>true</forceAjcCompile>
+					<Xlint>ignore</Xlint>
+					<complianceLevel>${maven.compiler.complianceLevel}</complianceLevel>
+					<sources />
+					<weaveDirectories>
+						<weaveDirectory>${project.build.directory}/classes</weaveDirectory>
+					</weaveDirectories>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<weaveDependencies>
+						<weaveDependency>
+							<groupId>io.qameta.allure</groupId>
+							<artifactId>allure-java-commons</artifactId>
+						</weaveDependency>
+					</weaveDependencies>
+				</configuration>
+			</plugin>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<version>${maven-jar-plugin.version}</version>
-					<configuration>
-						<finalName>${project.artifactId}</finalName>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<configuration>
+					<finalName>${project.artifactId}</finalName>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
 
