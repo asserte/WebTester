@@ -16,7 +16,7 @@ The following package offers a number of methods for clicking, finding, and writ
 
 #### Utils
 [@webdriver/testCase/utils](https://github.com/asserte/WebTester/tree/main/src/main/java/lt/insoft/webdriver/testCase/utils)
-The Utils package offers the main methods for creating drivers for Chrome, Edge, Firefox, and Internet Explorer. It also has a feature that highlights selected fields or buttons. 
+The Utils package offers the main methods for creating drivers for Chrome, Edge, Firefox, and Internet Explorer. It also has a feature that highlights selected fields or buttons. Readers package additionally includes helpful methods to read information from Excel and PDF files.  
 
 ### Resources
 [@resources](https://github.com/asserte/WebTester/tree/main/src/main/resources)
