@@ -89,7 +89,7 @@
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>#{appache-poi.version}</version>
+			<version>${appache-poi.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
