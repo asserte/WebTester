@@ -13,6 +13,7 @@ public class Constants {
 	public static final int DEFAULT_IMPLICIT_WAIT = Integer.parseInt(ConstantConfigurations.getProperty("driver.default.implicit.wait"));
 	public static final int DEFAULT_PAGE_LOAD_WAIT = Integer.parseInt(ConstantConfigurations.getProperty("driver.default.page.load.wait"));
 	public static final String BROWSER = ConstantConfigurations.getProperty("driver.browser");
+	public static final String DOWNLOAD_DIRECTORY = ConstantConfigurations.getProperty("download.directory");
 	public static final boolean TAKE_SCREENSHOT = Boolean.parseBoolean(ConstantConfigurations.getProperty("driver.take.screenshot"));
 	public static final String PROXY_HOST = ConstantConfigurations.getProperty("driver.proxy.host");
 	public static final String PROXY_PORT = ConstantConfigurations.getProperty("driver.proxy.port");

@@ -29,9 +29,11 @@
 
 		<selenium.version>4.1.4</selenium.version>
 		<webdrivermanager.vesrion>5.1.1</webdrivermanager.vesrion>
-		<allure.version>1.5.4</allure.version>
+		<allure.version>2.14.0</allure.version>
+		<allure.maven.version>2.10.0</allure.maven.version>
 
-		<xlsx-streamer.version>2.2.0</xlsx-streamer.version>
+		<appache-poi.version>5.2.2</appache-poi.version>
+		<pdfbox.version>2.0.26</pdfbox.version>
 		<stax-api.version>1.0-2</stax-api.version>
 		<curvesapi.version>1.07</curvesapi.version>
 		<jaxb-api.version>2.3.1</jaxb-api.version>
@@ -56,31 +58,26 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>ru.yandex.qatools.allure</groupId> <artifactId>allure-junit-adaptor</artifactId> 
-			<version>${allure.version}</version> </dependency> -->
-
 		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-java-commons -->
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-java-commons</artifactId>
-			<version>2.14.0</version>
+			<version>${allure.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-junit4</artifactId>
+			<version>${allure.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-maven</artifactId>
-			<version>2.10.0</version>
+			<version>${allure.maven.version}</version>
 		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-junit4 -->
-		<dependency>
-			<groupId>io.qameta.allure</groupId>
-			<artifactId>allure-junit4</artifactId>
-			<version>2.14.0</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>commons-cli</groupId>
@@ -88,10 +85,18 @@
 			<version>${commons-cli.version}</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
-			<groupId>com.monitorjbl</groupId>
-			<artifactId>xlsx-streamer</artifactId>
-			<version>${xlsx-streamer.version}</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>#{appache-poi.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>${pdfbox.version}</version>
 		</dependency>
 
 		<dependency>
@@ -245,12 +250,12 @@
 					</weaveDirectories>
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
-					 <weaveDependencies>
+					<weaveDependencies>
 						<weaveDependency>
 							<groupId>io.qameta.allure</groupId>
 							<artifactId>allure-java-commons</artifactId>
 						</weaveDependency>
-					</weaveDependencies> 
+					</weaveDependencies>
 				</configuration>
 			</plugin>
 
