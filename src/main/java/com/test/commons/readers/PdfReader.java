@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
-import org.junit.Assert;
 
 import com.test.commons.Constants;
 
@@ -18,52 +17,28 @@ public class PdfReader {
 
 	/**
 	 * Takes last modified pdf from downloads directory and checks if provided text
-	 * by parameters exists in pdf file. If text doesn't exist Assert exception will
-	 * be thrown.
+	 * by parameters exists in pdf file. Return Boolean value
 	 * 
 	 * @param reqTextInPDF
+	 * @return Boolean
 	 * @throws IOException
 	 */
-	public void checkIfExistsInPDF(String reqTextInPDF) throws IOException {
-		boolean flag = false;
-		try (PDDocument document = PDDocument.load(getLastModified(Constants.DOWNLOAD_DIRECTORY))) {
-
-			document.getClass();
-
-			if (!document.isEncrypted()) {
-
-				PDFTextStripperByArea stripper = new PDFTextStripperByArea();
-				stripper.setSortByPosition(true);
-
-				PDFTextStripper tStripper = new PDFTextStripper();
-
-				String pdfFileInText = tStripper.getText(document);
-
-				// split by whitespace
-				String lines[] = pdfFileInText.split("\\r?\\n");
-				for (String line : lines) {
-					if (line.contains(reqTextInPDF)) {
-						LOG.debug("Search result found in this line: " + line);
-						flag = true;
-						break;
-					}
-				}
-			}
-		}
-		Assert.assertTrue(reqTextInPDF + " not found in pdf file", flag);
+	public Boolean checkIfExistsInPDF(String reqTextInPDF) throws IOException {
+		return checkIfExistsInPDF(getLastModified(Constants.DOWNLOAD_DIRECTORY), reqTextInPDF);
 	}
 
 	/**
-	 * Takes last modified pdf from downloads directory and checks if provided text
-	 * by parameters doesn't exist in pdf file. If text exists Assert exception will
-	 * be thrown.
+	 * Takes file from the parameters and checks if provided text by parameters
+	 * exists in that file. Return Boolean value
 	 * 
+	 * @param file
 	 * @param reqTextInPDF
+	 * @return Boolean
 	 * @throws IOException
 	 */
-	public void checkIfDoesNotExistInPDF(String reqTextInPDF) throws IOException {
+	public Boolean checkIfExistsInPDF(File file, String reqTextInPDF) throws IOException {
 		boolean flag = false;
-		try (PDDocument document = PDDocument.load(getLastModified(Constants.DOWNLOAD_DIRECTORY))) {
+		try (PDDocument document = PDDocument.load(file)) {
 
 			document.getClass();
 
@@ -87,7 +62,7 @@ public class PdfReader {
 				}
 			}
 		}
-		Assert.assertFalse(reqTextInPDF + " not found in pdf file", flag);
+		return flag;
 	}
 
 	/**
