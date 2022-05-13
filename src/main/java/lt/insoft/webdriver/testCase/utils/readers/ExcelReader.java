@@ -1,4 +1,4 @@
-package com.test.commons.readers;
+package lt.insoft.webdriver.testCase.utils.readers;
 
 import java.io.File;
 import java.io.FileOutputStream;
