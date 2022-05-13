@@ -35,7 +35,7 @@ public class TestScripts extends TestCase {
 	@Test
 	@Description("Count how many references are in Math article")
 	public void t02() throws Exception {
-		int expectedCount = 70;
+		int expectedCount = 72;
 		t.get(Constants.DEFAULT_PORTAL_URL);
 		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "maths");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
@@ -44,17 +44,17 @@ public class TestScripts extends TestCase {
 	}
 	
 	@Test
-	@Description("Checking text in testing article")
+	@Description("Example of failing text find: Checking text in testing article")
 	public void t03() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
 		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
-		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
+		t.checkIfExists("Check if text exists", TestScriptsPage.failingTextBy, 2);
 	}
 
 	@Test
-	@Description("Count how many references are in Math article")
+	@Description("Example of failing assert: Count how many references are in Math article")
 	public void t04() throws Exception {
 		int expectedCount = 70;
 		t.get(Constants.DEFAULT_PORTAL_URL);
