@@ -1,8 +1,7 @@
-# WebTester  :man_technologist:
-is a *keyword driven test automation framework* that lets you develop, maintain and execute Selenium WebDriver and Java-based test scripts. 
+# WebTester
+is a *keyword driven test automation framework* that accelerates development, maintenance and execution Selenium WebDriver and Java-based test scripts.
 
-WebTester lets you execute a full suite or selected scripts via Jenkins and has a set of handy methods that make test scripts more readable and compact.
-The framework performs best in applications with a large number of text fields and dynamic HTML IDs.
+WebTester lets you execute a full suite or selected scripts via Jenkins and has a set of handy methods that make test scripts more readable and compact. The framework performs best in applications with a large number of text fields and dynamic HTML IDs.
 
 ## :package: Packages
 
