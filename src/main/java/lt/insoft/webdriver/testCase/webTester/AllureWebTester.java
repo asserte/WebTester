@@ -101,7 +101,7 @@ public class AllureWebTester extends WebTester {
 	}
 	
 	/**
-	 * Method used to envelope methods in order to add an Allure step over them.
+	 * Method used to envelope methods in order to add an Allure step over them, it is a way to force the step functionality.
 	 * 
 	 * @param stepDescription Allure step description
 	 * @param action          one or multiple methods provided by using lambda
