@@ -35,7 +35,7 @@ public class WebTester extends WebTesterBase {
 			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 		} catch (TimeoutException e) {
-			LOG.info("Element " + by.toString() + " failed to become visible");
+			LOG.info("Element " + by + " failed to become visible");
 			throw e;
 		}
 	}
@@ -77,7 +77,7 @@ public class WebTester extends WebTesterBase {
 		try {
 			WebElement wb = Highlighters.highlightGreen(driver, findNonStaleElement(by));
 			scrollToWebElement(wb);
-			LOG.info("Find " + by.toString());
+			LOG.info("Find " + by);
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
@@ -90,7 +90,7 @@ public class WebTester extends WebTesterBase {
 		try {
 			List<WebElement> wb = Highlighters.highlightGreen(driver, findNonStaleElements(by));
 			scrollToWebElement(wb.get(0));
-			LOG.info("Find " + by.toString());
+			LOG.info("Find " + by);
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
@@ -140,7 +140,7 @@ public class WebTester extends WebTesterBase {
 
 	@Step
 	public void setText(By by, int timeToWait, CharSequence... value) throws Exception {
-		LOG.info("Click " + by);
+		LOG.info("Set Text " + by);
 		WebElement wb = Highlighters.highlightRed(driver, find(by, timeToWait));
 		Assert.assertTrue(by + " input should be enabled.", wb.isEnabled());
 		Assert.assertTrue(by + " input should be displayed.", wb.isDisplayed());
@@ -151,8 +151,8 @@ public class WebTester extends WebTesterBase {
 		wb.sendKeys(value);
 	}
 
-	private void scrollToWebElement(WebElement element) throws Exception {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+	protected void scrollToWebElement(WebElement element) throws Exception {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 	public void get(String url) {
@@ -201,9 +201,15 @@ public class WebTester extends WebTesterBase {
 			return null;
 		}
 	}
+	
+
+	
+	
+	
 
 	@Step
 	public WebElement findNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait) throws Exception {
+		LOG.info("Find " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
 		int level = 0;
 		WebElement reference = find(referenceLabelOrPath, referenceIndex, timeToWait);
 		WebElement descendant = null;
@@ -226,22 +232,18 @@ public class WebTester extends WebTesterBase {
 		String builtXpath = isXpath(labelOrPath) ? labelOrPath : buildLabelXpath("*", labelOrPath);
 		builtXpath = builtXpath.replaceFirst("//", "./descendant::");
 		By by = By.xpath(builtXpath);
-			try {
-				WebElement we = Highlighters.highlightBlue(driver, findVisibleElements(by, timeToWait).get(index));
-				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", we);
-				return we;
-			} catch (IndexOutOfBoundsException e) {
-				throw new NoSuchElementException("window " + driver.getTitle() + " " + by.toString(), e);
-			}
-//		}
+		try {
+			WebElement we = Highlighters.highlightBlue(driver, findVisibleElements(by, timeToWait).get(index));
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", we);
+			return we;
+		} catch (IndexOutOfBoundsException e) {
+			throw new NoSuchElementException("window " + driver.getTitle() + " " + by.toString(), e);
+		}
 	}
 	
 	
-	
-	
-	
-//	TODO what about foundElements = getContextElement().findElements(by);?
-	public List<WebElement> findVisibleElements(By by, int timeToWait) throws Exception {
+	@Step
+	private List<WebElement> findVisibleElements(By by, int timeToWait) throws Exception {
 		List<WebElement> visibleElements = new ArrayList<WebElement>();
 		List<WebElement> foundElements = findElements(by, timeToWait);
 		for (WebElement e : foundElements) {
@@ -256,20 +258,19 @@ public class WebTester extends WebTesterBase {
 				}
 				attempts++;
 			}
-
 		}
 		return visibleElements;
 	}
 	
 	
-	public WebElement findVisibleElement(By by, int timeToWait) throws Exception {
-		List<WebElement> visibleElements = findVisibleElements(by, timeToWait);
-		if (!visibleElements.isEmpty()) {
-			return visibleElements.get(0);
-		} else {
-			throw new NoSuchElementException("Visible element not found by using by: " + by.toString());
-		}
-	}
+//	public WebElement findVisibleElement(By by, int timeToWait) throws Exception {
+//		List<WebElement> visibleElements = findVisibleElements(by, timeToWait);
+//		if (!visibleElements.isEmpty()) {
+//			return visibleElements.get(0);
+//		} else {
+//			throw new NoSuchElementException("Visible element not found by using by: " + by.toString());
+//		}
+//	}
 	
 	private boolean isXpath(String labelOrPath) {
 		return StringUtils.containsAny(labelOrPath, "[=@")

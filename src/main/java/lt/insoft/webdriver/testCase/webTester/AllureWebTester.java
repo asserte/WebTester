@@ -2,7 +2,9 @@ package lt.insoft.webdriver.testCase.webTester;
 
 import java.util.List;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 import com.test.commons.Action;
@@ -35,6 +37,44 @@ public class AllureWebTester extends WebTester {
 		} catch (Exception e) {
 			throw e;
 		}
+	}
+	
+	@Step("Click {2}[{3}] near {0}[{1}]")
+	public byte[] clickNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait) throws Exception {
+		LOG.info("Click " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
+		WebElement wb = findNear(referenceLabelOrPath, referenceIndex, targetElementXpath, targetIndex, timeToWait);
+		scrollToWebElement(wb);
+		byte[] screen = screenshot();
+		wb.click();
+		return screen;
+	}
+	
+	@Step("Click {1}[{0}] near {0}[{0}]")
+	public byte[] clickNear(String referenceLabelOrPath, String targetElementXpath, int timeToWait) throws Exception {
+		return clickNear(referenceLabelOrPath, 0, targetElementXpath, 0, timeToWait);
+	}
+	
+	@Step("Set {2}[{3}] near {0}[{1}]")
+	public void setTextNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait, CharSequence... keysToSend) throws Exception {
+		LOG.info("Set Text " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
+		WebElement wb = findNear(referenceLabelOrPath, referenceIndex, targetElementXpath, targetIndex, timeToWait);
+		Assert.assertTrue(wb + " input should be enabled.", wb.isEnabled());
+		Assert.assertTrue(wb + " input should be displayed.", wb.isDisplayed());
+		String existing = wb.getAttribute("value");
+		if (!"".equals(existing)) {
+			wb.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+		}
+		wb.sendKeys(keysToSend);
+	}
+	
+	@Step("Set {2}[{3}] near {0}[{1}]")
+	public void setTextNear(String referenceLabelOrPath, String targetElementXpath, int timeToWait, CharSequence... keysToSend) throws Exception {
+		setTextNear(referenceLabelOrPath, 0, targetElementXpath, 0, timeToWait, keysToSend);
+	}
+	
+	@Step("Set input[{3}] near {0}[{1}]")
+	public void setTextNear(String referenceLabelOrPath, int timeToWait, CharSequence... keysToSend) throws Exception {
+		setTextNear(referenceLabelOrPath, 0, "input", 0, timeToWait, keysToSend);
 	}
 
 	/**
