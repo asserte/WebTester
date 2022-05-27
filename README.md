@@ -1,5 +1,5 @@
 # WebTester
-is a test automation accelerator that simplifies development, maintenance and execution of Web UI automated test cases.
+WebTester is a test automation accelerator that simplifies development, maintenance and execution of Web UI automated test cases.
 
 WebTester lets you execute a full suite or selected scripts via Jenkins and has a set of handy methods that make test scripts more readable and compact. The framework performs best in applications with a large number of text fields and dynamic HTML IDs.
 
