@@ -1,7 +1,7 @@
 # WebTester
 WebTester is a test automation accelerator that simplifies development, maintenance and execution of Web UI automated test cases.
 
-WebTester lets you execute a full suite or selected scripts via Jenkins and has a set of handy methods that make test scripts more readable and compact. The framework performs best in applications with a large number of text fields and dynamic HTML IDs.
+WebTester lets you execute a full suite or selected test cases via Jenkins and has a set of handy methods that make scripts more readable and compact. The framework performs best in applications with a large number of text fields and dynamic HTML IDs.
 
 ## :package: Packages
 
@@ -31,3 +31,5 @@ Jobs can, of course, be scheduled and executed at specific times and days.
 
 #### Reporting
 The WebTester framework uses the Allure plugin for reporting. It makes it simple to track and detect potential flaws. Each failed test case includes a screenshot of the webpage. Of course, this feature might be extended, with screenshots recorded after each test case or step.
+
+Check out our [Wiki Page](https://github.com/asserte/WebTester/wiki) for more information
