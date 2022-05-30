@@ -25,7 +25,7 @@ We have already prepared possible file formats that may be required for testing 
 
 ## :bookmark_tabs: Execution and Reporting
 
-#### Execution and Parametrization
+#### Parametrization and Execution
 WebTester allows users to select required parameters. It provides parametrization option that is both unlimited and configurable.
 Jobs can, of course, be scheduled and executed at specific times and days.
 
