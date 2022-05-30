@@ -32,4 +32,7 @@ Jobs can, of course, be scheduled and executed at specific times and days.
 #### Reporting
 The WebTester framework uses the Allure plugin for reporting. It makes it simple to track and detect potential flaws. Each failed test case includes a screenshot of the webpage. Of course, this feature might be extended, with screenshots recorded after each test case or step.
 
+
+
+
 Check out our [Wiki Page](https://github.com/asserte/WebTester/wiki) for more information
