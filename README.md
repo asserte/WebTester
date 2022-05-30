@@ -35,4 +35,4 @@ The WebTester framework uses the Allure plugin for reporting. It makes it simple
 
 
 
-Check out our [Wiki Page](https://github.com/asserte/WebTester/wiki) for more information
+### For additional information, visit our [Wiki Page](https://github.com/asserte/WebTester/wiki)
