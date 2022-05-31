@@ -41,9 +41,8 @@ public final class ConstantConfigurations {
 		try {
 			encryptor.setPassword(masterPassword);
 		} catch (EncryptionInitializationException|ExceptionInInitializerError|IllegalArgumentException e) {
-			LOG.error("Master password needs to be provided as a JDK parameter for scripts to run. The master password value is used to decrypt any encrypted parameters in the property file.");
+			LOG.error("Master password is not provided. The master password value is used to decrypt any encrypted parameters in the property file.");
 			LOG.error("If Master Password value is not provided, encrypted parameters won't be read from property file, an empty value will be provided instead");
-			e.printStackTrace();
 		}
 		properties = new EncryptableProperties(encryptor);
 		try {
@@ -84,10 +83,8 @@ public final class ConstantConfigurations {
 		if (key != null && !key.trim().isEmpty()) {
 			try {
 				result = getInstance().properties.getProperty(key);
-			} catch (EncryptionInitializationException|ExceptionInInitializerError|IllegalArgumentException|EncryptionOperationNotPossibleException e) { //TODO
-				LOG.error("Master password needs to be provided as a JDK parameter for scripts to run. The master password value is used to decrypt any encrypted parameters in the property file.");
-				LOG.error("If Master Password value is not provided, encrypted parameters won't be read from property file, an empty value will be provided instead");	
-				e.printStackTrace();
+			} catch (EncryptionInitializationException|ExceptionInInitializerError|IllegalArgumentException|EncryptionOperationNotPossibleException e) { 
+				//TODO
 			}
 		}
 		if (result != null) {
