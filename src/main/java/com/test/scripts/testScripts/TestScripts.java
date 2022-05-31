@@ -23,10 +23,10 @@ public class TestScripts extends TestCase {
 	}
 
 	@Test
-	@Description("Checking text in testing article")
+	@Description("Checking text in exam article")
 	public void t01() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
-		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
+		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "exam");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
 		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
@@ -44,10 +44,10 @@ public class TestScripts extends TestCase {
 	}
 	
 	@Test
-	@Description("Example of failing text find: Checking text in testing article")
+	@Description("Example of failing text find: Checking text in exam article")
 	public void t03() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
-		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
+		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "exam");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
 		t.checkIfExists("Check if text exists", TestScriptsPage.failingTextBy, 2);
