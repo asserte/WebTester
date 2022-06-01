@@ -22,39 +22,6 @@ public class TestScripts extends TestCase {
 		testScriptsPage = new TestScriptsPage();
 	}
 
-	@Test
-	@Description("Checking text in exam article")
-	public void t00() throws Exception {
-		t.get("https://www.epolicija.lt");
-		t.sleepMillis(200);
-		t.clickNear("Pranešti apie įvykį", "*", 5);
-		t.sleepMillis(200);
-		t.clickNear("Radau ar pamečiau daiktą", 0, "*", 2, 3);
-		t.sleepMillis(200);
-		t.clickNear(" Pranešti neprisijungus ", "*", 3);
-		t.sleepMillis(200);
-		t.clickNear("Ne", 0, "*", 1, 3);
-		t.sleepMillis(200);
-		t.clickNear("Radau daiktą", 0, "*", 1, 3);
-		t.sleepMillis(200);
-		t.setTextNear("Ką radote?", 3, "esst");
-		t.sleepMillis(200);
-		t.setTextNear("eigu galite, nurodykite dace", 1, "*", 5, 3, "essrerreerrt");
-	}
-	
-	@Test
-	@Description("Checking text in testing article")
-	public void t000() throws Exception {
-		t.get("http://demowebshop.tricentis.com/");
-		t.sleepMillis(200);
-		t.setTextNear("Search store", 0, "laptop");
-		t.clickNear("Search", "input", 5);
-		t.clickNear("Register", "a", 5);
-		t.clickNear("Male", "input", 5);
-		t.setTextNear("First name:", 2, "laptop");
-		t.setTextNear("Last name:", 2, "laptop");
-		t.setTextNear("Email:", 0, "input", 0, 2, "laptop");
-	}
 	
 	@Test
 	@Description("Checking text in testing article")
