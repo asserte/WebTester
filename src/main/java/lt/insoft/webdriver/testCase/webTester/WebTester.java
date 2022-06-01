@@ -152,7 +152,11 @@ public class WebTester extends WebTesterBase {
 	}
 
 	protected void scrollToWebElement(WebElement element) throws Exception {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({\r\n" + 
+				"            behavior: 'auto',\r\n" + 
+				"            block: 'center',\r\n" + 
+				"            inline: 'center'\r\n" + 
+				"        });", element);
 	}
 
 	@Step
