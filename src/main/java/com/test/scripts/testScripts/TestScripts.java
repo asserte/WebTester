@@ -28,7 +28,7 @@ public class TestScripts extends TestCase {
 	public void t00() throws Exception {
 		t.get("https://www.epolicija.lt");
 		t.sleepMillis(200);
-		t.clickNear("//span[text()='Pranešti apie įvykį']", "*", 5);
+		t.clickNear("Pranešti apie įvykį", "*", 5);
 		t.sleepMillis(200);
 		t.clickNear("Radau ar pamečiau daiktą", 0, "*", 2, 3);
 		t.sleepMillis(200);
@@ -43,12 +43,25 @@ public class TestScripts extends TestCase {
 		t.setTextNear("eigu galite, nurodykite dace", 1, "*", 5, 3, "essrerreerrt");
 	}
 	
+	@Test
+	@Description("Checking text in testing article")
+	public void t000() throws Exception {
+		t.get("http://demowebshop.tricentis.com/");
+		t.sleepMillis(200);
+		t.setTextNear("Search store", 0, "laptop");
+		t.clickNear("Search", "input", 5);
+		t.clickNear("Register", "a", 5);
+		t.clickNear("Male", "input", 5);
+		t.setTextNear("First name:", 2, "laptop");
+		t.setTextNear("Last name:", 2, "laptop");
+		t.setTextNear("Email:", 0, "input", 0, 2, "laptop");
+	}
 	
 	@Test
 	@Description("Checking text in testing article")
 	public void t01() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
-		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
+		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "essay");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
 		t.checkIfExists("Check if text exists", TestScriptsPage.essayTextBy, 2);
@@ -69,7 +82,7 @@ public class TestScripts extends TestCase {
 	@Description("Example of failing text find: Checking text in testing article")
 	public void t03() throws Exception {
 		t.get(Constants.DEFAULT_PORTAL_URL);
-		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "testing");
+		t.setText("Enter text to search bar", TestScriptsPage.searchFieldBy, 5, "essasy");
 		t.click("Click search button", TestScriptsPage.searchButtonBy, 1);
 		t.click("Click Essay link", TestScriptsPage.essayLinkBy, 2);
 		t.checkIfExists("Check if text exists", TestScriptsPage.failingTextBy, 2);
