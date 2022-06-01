@@ -40,6 +40,7 @@ public class AllureWebTester extends WebTester {
 	}
 	
 	@Step("Click [{2}][{3}] near [{0}][{1}]")
+	@Attachment
 	public byte[] clickNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait) throws Exception {
 		LOG.info("Click " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
 		WebElement wb = findNear(referenceLabelOrPath, referenceIndex, targetElementXpath, targetIndex, timeToWait);
@@ -50,6 +51,7 @@ public class AllureWebTester extends WebTester {
 	}
 	
 	@Step("Click [{1}][0] near [{0}][0]")
+	@Attachment
 	public byte[] clickNear(String referenceLabelOrPath, String targetElementXpath, int timeToWait) throws Exception {
 		return clickNear(referenceLabelOrPath, 0, targetElementXpath, 0, timeToWait);
 	}
