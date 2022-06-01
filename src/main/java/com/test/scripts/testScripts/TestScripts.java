@@ -2,6 +2,7 @@ package com.test.scripts.testScripts;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import com.test.commons.Constants;
 
@@ -22,6 +23,20 @@ public class TestScripts extends TestCase {
 		testScriptsPage = new TestScriptsPage();
 	}
 
+	@Test
+	@Description("Checking text in testing article")
+	public void t00() throws Exception {
+		t.get("https://www.epolicija.lt");
+		t.clickNear("//span[text()='Pranešti apie įvykį']", "*", 5);
+		t.clickNear("Radau ar pamečiau daiktą", 0, "*", 2, 1);
+		t.clickNear(" Pranešti neprisijungus ", "*", 1);
+		t.clickNear("Ne", 0, "*", 1, 1);
+		t.clickNear("Radau daiktą", 0, "*", 1, 1);
+		t.setTextNear("Ką radote?", 1, "esst");
+		t.setTextNear("eigu galite, nurodykite dace", 1, "*", 5, 1, "essrerreerrt");
+	}
+	
+	
 	@Test
 	@Description("Checking text in testing article")
 	public void t01() throws Exception {
