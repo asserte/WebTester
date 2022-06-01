@@ -27,12 +27,19 @@ public class TestScripts extends TestCase {
 	@Description("Checking text in testing article")
 	public void t00() throws Exception {
 		t.get("https://www.epolicija.lt");
+		t.sleepMillis(200);
 		t.clickNear("//span[text()='Pranešti apie įvykį']", "*", 5);
+		t.sleepMillis(200);
 		t.clickNear("Radau ar pamečiau daiktą", 0, "*", 2, 1);
+		t.sleepMillis(200);
 		t.clickNear(" Pranešti neprisijungus ", "*", 1);
+		t.sleepMillis(200);
 		t.clickNear("Ne", 0, "*", 1, 1);
+		t.sleepMillis(200);
 		t.clickNear("Radau daiktą", 0, "*", 1, 1);
+		t.sleepMillis(200);
 		t.setTextNear("Ką radote?", 1, "esst");
+		t.sleepMillis(200);
 		t.setTextNear("eigu galite, nurodykite dace", 1, "*", 5, 1, "essrerreerrt");
 	}
 	

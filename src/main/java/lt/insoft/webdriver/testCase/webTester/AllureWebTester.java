@@ -39,7 +39,7 @@ public class AllureWebTester extends WebTester {
 		}
 	}
 	
-	@Step("Click {2}[{3}] near {0}[{1}]")
+	@Step("Click [{2}][{3}] near [{0}][{1}]")
 	public byte[] clickNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait) throws Exception {
 		LOG.info("Click " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
 		WebElement wb = findNear(referenceLabelOrPath, referenceIndex, targetElementXpath, targetIndex, timeToWait);
@@ -49,12 +49,12 @@ public class AllureWebTester extends WebTester {
 		return screen;
 	}
 	
-	@Step("Click {1}[{0}] near {0}[{0}]")
+	@Step("Click [{1}][0] near [{0}][0]")
 	public byte[] clickNear(String referenceLabelOrPath, String targetElementXpath, int timeToWait) throws Exception {
 		return clickNear(referenceLabelOrPath, 0, targetElementXpath, 0, timeToWait);
 	}
 	
-	@Step("Set {2}[{3}] near {0}[{1}]")
+	@Step("Set [{2}][{3}] near [{0}][{1}]")
 	public void setTextNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait, CharSequence... keysToSend) throws Exception {
 		LOG.info("Set Text " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
 		WebElement wb = findNear(referenceLabelOrPath, referenceIndex, targetElementXpath, targetIndex, timeToWait);
@@ -67,12 +67,12 @@ public class AllureWebTester extends WebTester {
 		wb.sendKeys(keysToSend);
 	}
 	
-	@Step("Set {2}[{3}] near {0}[{1}]")
+	@Step("Set [{2}][{3}] near [{0}][{1}]")
 	public void setTextNear(String referenceLabelOrPath, String targetElementXpath, int timeToWait, CharSequence... keysToSend) throws Exception {
 		setTextNear(referenceLabelOrPath, 0, targetElementXpath, 0, timeToWait, keysToSend);
 	}
 	
-	@Step("Set input[{3}] near {0}[{1}]")
+	@Step("Set [input][0] near [{0}][0]")
 	public void setTextNear(String referenceLabelOrPath, int timeToWait, CharSequence... keysToSend) throws Exception {
 		setTextNear(referenceLabelOrPath, 0, "input", 0, timeToWait, keysToSend);
 	}

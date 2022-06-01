@@ -155,6 +155,7 @@ public class WebTester extends WebTesterBase {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
+	@Step
 	public void get(String url) {
 		driver.get(url);
 	}
