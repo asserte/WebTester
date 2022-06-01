@@ -57,6 +57,8 @@ public class DriverCreator {
 		options.addArguments("disable-extensions");
 		options.addArguments("--start-maximized");
 		options.addArguments("--disable-gpu");
+//		options.addArguments("--window-size=1920x1080");
+//		options.addArguments("--headless");
 		return new ChromeDriver(options);
 	}
 

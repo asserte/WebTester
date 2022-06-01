@@ -5,6 +5,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -34,7 +35,7 @@ public class WebTester extends WebTesterBase {
 			WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(timeOutInSeconds));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 		} catch (TimeoutException e) {
-			LOG.info("Element " + by.toString() + " failed to become visible");
+			LOG.info("Element " + by + " failed to become visible");
 			throw e;
 		}
 	}
@@ -76,19 +77,20 @@ public class WebTester extends WebTesterBase {
 		try {
 			WebElement wb = Highlighters.highlightGreen(driver, findNonStaleElement(by));
 			scrollToWebElement(wb);
-			LOG.info("Find " + by.toString());
+			LOG.info("Find " + by);
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
 		}
 	}
 	
+	
 	public List<WebElement> findElements(By by, int timeToWait) throws Exception {
 		waitToBeVisible(by, timeToWait);
 		try {
 			List<WebElement> wb = Highlighters.highlightGreen(driver, findNonStaleElements(by));
 			scrollToWebElement(wb.get(0));
-			LOG.info("Find " + by.toString());
+			LOG.info("Find " + by);
 			return wb;
 		} catch (NoSuchElementException e) {
 			throw new NoSuchElementException("window " + driver.getTitle() + " " + e.getMessage(), e);
@@ -136,16 +138,10 @@ public class WebTester extends WebTesterBase {
 		return screen;
 	}
 
-	public void assertUrl(String expectedUrl) throws Exception {
-		String currentUrl = getDriver().getCurrentUrl();
-		Assert.assertTrue("Current url '" + currentUrl + "' doesn't contain '" + expectedUrl + "' fragment",
-				currentUrl.contains(expectedUrl));
-	}
-
 	@Step
 	public void setText(By by, int timeToWait, CharSequence... value) throws Exception {
-		LOG.info("Click " + by);
-		WebElement wb = Highlighters.highlightBlue(driver, find(by, timeToWait));
+		LOG.info("Set Text " + by);
+		WebElement wb = Highlighters.highlightRed(driver, find(by, timeToWait));
 		Assert.assertTrue(by + " input should be enabled.", wb.isEnabled());
 		Assert.assertTrue(by + " input should be displayed.", wb.isDisplayed());
 		String existing = wb.getAttribute("value");
@@ -155,10 +151,15 @@ public class WebTester extends WebTesterBase {
 		wb.sendKeys(value);
 	}
 
-	private void scrollToWebElement(WebElement element) throws Exception {
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", element);
+	protected void scrollToWebElement(WebElement element) throws Exception {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({\r\n" + 
+				"            behavior: 'auto',\r\n" + 
+				"            block: 'center',\r\n" + 
+				"            inline: 'center'\r\n" + 
+				"        });", element);
 	}
 
+	@Step
 	public void get(String url) {
 		driver.get(url);
 	}
@@ -204,6 +205,86 @@ public class WebTester extends WebTesterBase {
 		} else {
 			return null;
 		}
+	}
+	
+
+	
+	
+	
+
+	@Step
+	public WebElement findNear(String referenceLabelOrPath, int referenceIndex, String targetElementXpath, int targetIndex, int timeToWait) throws Exception {
+		LOG.info("Find " + targetElementXpath + "[" + targetIndex + "] near " + referenceLabelOrPath + "[" + referenceIndex + "]");
+		int level = 0;
+		WebElement reference = find(referenceLabelOrPath, referenceIndex, timeToWait);
+		WebElement descendant = null;
+		do {
+			try {
+				descendant = reference.findElements(By.xpath("./descendant::" + targetElementXpath)).get(targetIndex);
+			} catch (IndexOutOfBoundsException e) {
+			}
+			reference = reference.findElement(By.xpath("./parent::*"));
+			if (level++ > 10 || "html".equalsIgnoreCase(reference.getTagName())) {
+				throw new NoSuchElementException("WebElement not found with reference label or xpath: '" + referenceLabelOrPath + "'[" + referenceIndex + "] and target '" + targetElementXpath + "'[" + targetIndex + "]");
+			}
+		} while (descendant == null);
+		return Highlighters.highlightRed(driver, descendant);
+	}
+	
+	
+	@Step
+	public WebElement find(String labelOrPath, int index, int timeToWait) throws Exception {
+		String builtXpath = isXpath(labelOrPath) ? labelOrPath : buildLabelXpath("*", labelOrPath);
+		builtXpath = builtXpath.replaceFirst("//", "./descendant::");
+		By by = By.xpath(builtXpath);
+		try {
+			WebElement we = Highlighters.highlightBlue(driver, findVisibleElements(by, timeToWait).get(index));
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", we);
+			return we;
+		} catch (IndexOutOfBoundsException e) {
+			throw new NoSuchElementException("window " + driver.getTitle() + " " + by.toString(), e);
+		}
+	}
+	
+	
+	@Step
+	private List<WebElement> findVisibleElements(By by, int timeToWait) throws Exception {
+		List<WebElement> visibleElements = new ArrayList<WebElement>();
+		List<WebElement> foundElements = findElements(by, timeToWait);
+		for (WebElement e : foundElements) {
+			int attempts = 0;
+			while (attempts < 5) {
+				try {
+					if (e.isDisplayed()) {
+						visibleElements.add(e);
+					}
+					break;
+				} catch (StaleElementReferenceException e2) {
+				}
+				attempts++;
+			}
+		}
+		return visibleElements;
+	}
+	
+	
+//	public WebElement findVisibleElement(By by, int timeToWait) throws Exception {
+//		List<WebElement> visibleElements = findVisibleElements(by, timeToWait);
+//		if (!visibleElements.isEmpty()) {
+//			return visibleElements.get(0);
+//		} else {
+//			throw new NoSuchElementException("Visible element not found by using by: " + by.toString());
+//		}
+//	}
+	
+	private boolean isXpath(String labelOrPath) {
+		return StringUtils.containsAny(labelOrPath, "[=@")
+				|| (labelOrPath != null && (labelOrPath.startsWith("//")) || labelOrPath.startsWith("./"));
+	}
+	
+	private String buildLabelXpath(String tag, String label) {
+		return "//" + tag + "[contains(text(),'" + label + "') or contains(@title,'" + label
+				+ "') or contains(@value,'" + label + "')]";
 	}
 
 }
